@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长沙理工大学2026届毕业晚会</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0e17;
+            --surface: #111827;
+            --gold: #d4a853;
+            --gold-light: #f0d078;
+            --blue: #1e5fbb;
+            --blue-light: #3b82f6;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s, backdrop-filter 0.3s;
+        }
+        nav.scrolled {
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-brand {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1628 0%, #0f2242 40%, #1a1a2e 100%);
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(30, 95, 187, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 30%, rgba(212, 168, 83, 0.1) 0%, transparent 50%);
+        }
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            z-index: 2;
+            padding: 0 24px;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            color: var(--gold);
+            font-size: 13px;
+            letter-spacing: 4px;
+            margin-bottom: 28px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+            text-shadow: 0 0 40px rgba(212, 168, 83, 0.3);
+        }
+        .hero h1 .gold { color: var(--gold-light); }
+        .hero-subtitle {
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 2px;
+            animation: bounce 2s ease infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* --- Section Common --- */
+        section {
+            padding: 100px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .section-tag {
+            display: inline-block;
+            padding: 4px 16px;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+        .section-header h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-size: 15px;
+        }
+
+        /* --- Gallery --- */
+        .gallery {
+            background: var(--surface);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+        .gallery-item-overlay span {
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        /* --- Info Section --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+        }
+        .info-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .info-card:hover { border-color: var(--gold); }
+        .info-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+        .info-card h3 {
+            font-size: 16px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .info-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 48px 32px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* --- Lightbox --- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .lightbox-content .lb-inner {
+            width: 80vw;
+            height: 60vh;
+            border-radius: 8px;
+        }
+        .lightbox-caption {
+            color: var(--text-muted);
+            margin-top: 16px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 8px;
+            transition: opacity 0.2s;
+        }
+        .lightbox-close:hover { opacity: 0.6; }
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-prev:hover,
+        .lightbox-next:hover { background: rgba(255,255,255,0.18); }
+        .lightbox-prev { left: 32px; }
+        .lightbox-next { right: 32px; }
+
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+            .nav-links { gap: 16px; }
+            section { padding: 64px 20px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .lightbox-prev { left: 12px; }
+            .lightbox-next { right: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-brand">CSUST 2026</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#gallery">精彩瞬间</a></li>
+            <li><a href="#info">晚会详情</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">CLASS OF 2026</div>
+            <h1>长沙理工大学<br><span class="gold">毕业晚会</span></h1>
+            <p class="hero-subtitle">青春不散场 梦想正起航</p>
+        </div>
+        <div class="hero-scroll">向下浏览</div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <div class="section-tag">PHOTOS</div>
+            <h2>精彩瞬间</h2>
+            <p>记录这个夏天最闪耀的夜晚</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-index="0" data-caption="典礼现场">
+                <img src="DSC05156.JPG" alt="典礼现场">
+                <div class="gallery-item-overlay"><span>典礼现场</span></div>
+            </div>
+            <div class="gallery-item" data-index="1" data-caption="舞台表演">
+                <img src="DSC05270.JPG" alt="舞台表演">
+                <div class="gallery-item-overlay"><span>舞台表演</span></div>
+            </div>
+            <div class="gallery-item" data-index="2" data-caption="校园夜景">
+                <img src="DSC05893.JPG" alt="校园夜景">
+                <div class="gallery-item-overlay"><span>校园夜景</span></div>
+            </div>
+            <div class="gallery-item" data-index="3" data-caption="同窗合影">
+                <img src="DSC05961.JPG" alt="同窗合影">
+                <div class="gallery-item-overlay"><span>同窗合影</span></div>
+            </div>
+            <div class="gallery-item" data-index="4" data-caption="拨穗仪式">
+                <img src="DSC06088.JPG" alt="拨穗仪式">
+                <div class="gallery-item-overlay"><span>拨穗仪式</span></div>
+            </div>
+            <div class="gallery-item" data-index="5" data-caption="抛帽瞬间">
+                <img src="DSC06139.JPG" alt="抛帽瞬间">
+                <div class="gallery-item-overlay"><span>抛帽瞬间</span></div>
+            </div>
+            <div class="gallery-item" data-index="6" data-caption="师生合影">
+                <img src="DSC_1712.JPG" alt="师生合影">
+                <div class="gallery-item-overlay"><span>师生合影</span></div>
+            </div>
+            <div class="gallery-item" data-index="7" data-caption="晚会落幕">
+                <img src="DSC_1815.JPG" alt="晚会落幕">
+                <div class="gallery-item-overlay"><span>晚会落幕</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="info">
+        <div class="section-header">
+            <div class="section-tag">DETAILS</div>
+            <h2>晚会详情</h2>
+            <p>2026届毕业生共同的记忆</p>
+        </div>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">📅</div>
+                <h3>时间</h3>
+                <p>2026年6月20日<br>19:00 - 22:00</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <h3>地点</h3>
+                <p>云塘校区<br>大会堂</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🎯</div>
+                <h3>主题</h3>
+                <p>青春不散场<br>梦想正起航</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">👥</div>
+                <h3>主办</h3>
+                <p>共青团长沙理工大学委员会<br>校学生会</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        2026 长沙理工大学毕业晚会 青春不散场
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lbClose">×</button>
+        <button class="lightbox-prev" id="lbPrev">◂</button>
+        <button class="lightbox-next" id="lbNext">▸</button>
+        <div class="lightbox-content">
+            <div class="lb-inner" id="lbImage"></div>
+        </div>
+        <p class="lightbox-caption" id="lbCaption"></p>
+    </div>
+
+    <script>
+        const particlesContainer = document.getElementById("particles");
+        for (let i = 0; i < 60; i++) {
+            const p = document.createElement("div");
+            p.classList.add("particle");
+            p.style.left = Math.random() * 100 + "%";
+            p.style.animationDelay = Math.random() * 8 + "s";
+            p.style.animationDuration = (Math.random() * 6 + 4) + "s";
+            p.style.width = p.style.height = (Math.random() * 3 + 1) + "px";
+            particlesContainer.appendChild(p);
+        }
+
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 60) navbar.classList.add("scrolled");
+            else navbar.classList.remove("scrolled");
+        });
+
+        const items = document.querySelectorAll(".gallery-item");
+        const lightbox = document.getElementById("lightbox");
+        const lbImage = document.getElementById("lbImage");
+        const lbCaption = document.getElementById("lbCaption");
+        const lbClose = document.getElementById("lbClose");
+        const lbPrev = document.getElementById("lbPrev");
+        const lbNext = document.getElementById("lbNext");
+        let currentIndex = 0;
+
+        const photoFiles = ["DSC05156.JPG","DSC05270.JPG","DSC05893.JPG","DSC05961.JPG","DSC06088.JPG","DSC06139.JPG","DSC_1712.JPG","DSC_1815.JPG"];
+
+        function openLightbox(index) {
+            currentIndex = index;
+            lbImage.innerHTML = '<img src="' + photoFiles[index] + '" style="width:100%;height:100%;object-fit:contain">';
+            lbCaption.textContent = items[index].dataset.caption;
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove("active");
+            document.body.style.overflow = "";
+            lbImage.innerHTML = "";
+            
+        }
+
+        items.forEach(function(item) {
+            item.addEventListener("click", function() {
+                openLightbox(parseInt(item.dataset.index));
+            });
+        });
+
+        lbClose.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", function(e) {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        lbPrev.addEventListener("click", function(e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            openLightbox(currentIndex);
+        });
+
+        lbNext.addEventListener("click", function(e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % items.length;
+            openLightbox(currentIndex);
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (!lightbox.classList.contains("active")) return;
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowLeft") { currentIndex = (currentIndex - 1 + items.length) % items.length; openLightbox(currentIndex); }
+            if (e.key === "ArrowRight") { currentIndex = (currentIndex + 1) % items.length; openLightbox(currentIndex); }
+        });
+    </script>
+</body>
+</html>
